@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    /* Portfolio Dark Theme Colors */
+    --background: 217 32% 17%;
+    --foreground: 210 40% 98%;
+    
+    --card: 217 28% 20%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 217 32% 17%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 199 89% 48%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 217 28% 25%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 217 28% 22%;
+    --muted-foreground: 215 20% 65%;
+    
+    --accent: 199 89% 48%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 217 28% 25%;
+    --input: 217 28% 22%;
+    --ring: 199 89% 48%;
+    
+    --radius: 0.75rem;
+    
+    /* Custom Portfolio Variables */
+    --portfolio-navy: 217 32% 17%;
+    --portfolio-dark-navy: 217 32% 14%;
+    --portfolio-blue: 199 89% 48%;
+    --portfolio-blue-glow: 199 89% 48% / 0.3;
+    --portfolio-text-muted: 215 20% 65%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--portfolio-blue)), hsl(199 89% 60%));
+    --gradient-card: linear-gradient(135deg, hsl(var(--card)), hsl(217 28% 22%));
+    --gradient-hero: radial-gradient(ellipse at center, hsl(var(--portfolio-blue-glow)), transparent);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(var(--portfolio-blue-glow));
+    --shadow-card: 0 10px 30px -10px hsl(217 32% 10% / 0.5);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Portfolio Animation Classes */
+  .fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+  
+  .typing-cursor::after {
+    content: '|';
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--portfolio-blue-glow));
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--portfolio-blue-glow)), 0 0 60px hsl(var(--portfolio-blue-glow));
+    }
+  }
+}

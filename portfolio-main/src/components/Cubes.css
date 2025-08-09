@@ -1,0 +1,159 @@
+.skills3d-container {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+  perspective: 2000px; /* deeper 3D effect */
+  height: 100vh;
+}
+
+.skills3d-wrapper {
+  width: 200px;
+  height: 200px;
+  animation: cube-diagonal-move 8s infinite ease-in-out;
+}
+
+.skillbox {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cube-rotate-3axis 8s infinite ease-in-out;
+}
+
+.skillbox-side {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: #026b739f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #0EA5E9;
+}
+
+.skillbox-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Cube faces positioning */
+.skillbox-side-1 { transform: rotateY(0deg) translateZ(100px); }
+.skillbox-side-2 { transform: rotateY(90deg) translateZ(100px); }
+.skillbox-side-3 { transform: rotateY(180deg) translateZ(100px); }
+.skillbox-side-4 { transform: rotateY(-90deg) translateZ(100px); }
+.skillbox-side-5 { transform: rotateX(90deg) translateZ(100px); }
+.skillbox-side-6 { transform: rotateX(-90deg) translateZ(100px); }
+
+/* Rotation on 3 axes */
+@keyframes cube-rotate-3axis {
+  0%   { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  50%  { transform: rotateX(480deg) rotateY(360deg) rotateZ(720deg); }
+  100% { transform: rotateX(960deg) rotateY(720deg) rotateZ(1440deg); }
+}
+
+/* Diagonal movement so they meet and separate */
+@keyframes cube-diagonal-move {
+  0%   { transform: translate(-150px, -150px); }
+  40%  { transform: translate(0px, 0px); }   /* Moving toward center */
+  50%  { transform: translate(0px, 0px); }   /* Hold as cuboid */
+  60%  { transform: translate(0px, 0px); }   /* Still together */
+  100% { transform: translate(-150px, -150px); } /* Back to start */
+}
+
+/* Second cube moves opposite direction */
+.skills3d-wrapper:nth-child(2) {
+  animation-name: cube-diagonal-move-reverse;
+}
+
+@keyframes cube-diagonal-move-reverse {
+  0%   { transform: translate(150px, 150px); }
+  40%  { transform: translate(0px, 0px); }
+  50%  { transform: translate(0px, 0px); }
+  60%  { transform: translate(0px, 0px); }
+  100% { transform: translate(150px, 150px); }
+}
+
+/* Base cube size */
+.skills3d-wrapper {
+  width: 200px;
+  height: 200px;
+  animation: cube-diagonal-move 8s infinite ease-in-out;
+}
+
+.skillbox-side {
+  width: 200px;
+  height: 200px;
+}
+
+.skillbox-side-1 { transform: rotateY(0deg) translateZ(100px); }
+.skillbox-side-2 { transform: rotateY(90deg) translateZ(100px); }
+.skillbox-side-3 { transform: rotateY(180deg) translateZ(100px); }
+.skillbox-side-4 { transform: rotateY(-90deg) translateZ(100px); }
+.skillbox-side-5 { transform: rotateX(90deg) translateZ(100px); }
+.skillbox-side-6 { transform: rotateX(-90deg) translateZ(100px); }
+
+/* ---------- Responsive Adjustments ---------- */
+
+/* Medium screens (tablets) */
+@media (max-width: 1024px) {
+  .skills3d-wrapper {
+    width: 150px;
+    height: 150px;
+  }
+
+  .skillbox-side {
+    width: 150px;
+    height: 150px;
+  }
+
+  .skillbox-side-1 { transform: rotateY(0deg) translateZ(75px); }
+  .skillbox-side-2 { transform: rotateY(90deg) translateZ(75px); }
+  .skillbox-side-3 { transform: rotateY(180deg) translateZ(75px); }
+  .skillbox-side-4 { transform: rotateY(-90deg) translateZ(75px); }
+  .skillbox-side-5 { transform: rotateX(90deg) translateZ(75px); }
+  .skillbox-side-6 { transform: rotateX(-90deg) translateZ(75px); }
+}
+
+@media (max-width: 600px) {
+  .skills3d-wrapper {
+    width: 100px;
+    height: 100px;
+    animation: none; /* Remove diagonal animation */
+  }
+
+  /* Apply vertical movement animations */
+  .skills3d-wrapper:nth-child(1) {
+    animation: cube-vertical-move-up 4s infinite ease-in-out;
+  }
+
+  .skills3d-wrapper:nth-child(2) {
+    animation: cube-vertical-move-down 4s infinite ease-in-out;
+  }
+
+  /* Adjust cube side sizes and translateZ as before */
+  .skillbox-side {
+    width: 100px;
+    height: 100px;
+  }
+
+  .skillbox-side-1 { transform: rotateY(0deg) translateZ(50px); }
+  .skillbox-side-2 { transform: rotateY(90deg) translateZ(50px); }
+  .skillbox-side-3 { transform: rotateY(180deg) translateZ(50px); }
+  .skillbox-side-4 { transform: rotateY(-90deg) translateZ(50px); }
+  .skillbox-side-5 { transform: rotateX(90deg) translateZ(50px); }
+  .skillbox-side-6 { transform: rotateX(-90deg) translateZ(50px); }
+}
+
+@keyframes cube-vertical-move-up {
+  0%, 100% { transform: translateY(30px); }
+  50%      { transform: translateY(0); }
+}
+
+@keyframes cube-vertical-move-down {
+  0%, 100% { transform: translateY(-30px); }
+  50%      { transform: translateY(0); }
+}
+
+
