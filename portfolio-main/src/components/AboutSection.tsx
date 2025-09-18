@@ -1,10 +1,21 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Award, Users, Code, Coffee } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchHero } from "@/action/heroActions";
+
 
 const AboutSection = () => {
+  const dispatch = useDispatch();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    dispatch(fetchHero());
+  }, [dispatch]);
+
+  // Get hero data from Redux
+const { data, loading, error } = useSelector((state) => state.hero);
 
   const [counters, setCounters] = useState({
     projects: 0,
@@ -23,17 +34,17 @@ const AboutSection = () => {
   useEffect(() => {
     if (isInView) {
       const duration = 2000; // 2 seconds
-      const steps = 60; // 60 steps for smooth animation
+      const steps = 60;
       const stepDuration = duration / steps;
 
       Object.keys(finalCounts).forEach((key) => {
         let current = 0;
-        const increment = finalCounts[key as keyof typeof finalCounts] / steps;
+        const increment = finalCounts[key] / steps;
         
         const timer = setInterval(() => {
           current += increment;
-          if (current >= finalCounts[key as keyof typeof finalCounts]) {
-            current = finalCounts[key as keyof typeof finalCounts];
+          if (current >= finalCounts[key]) {
+            current = finalCounts[key];
             clearInterval(timer);
           }
           
@@ -117,14 +128,13 @@ const AboutSection = () => {
           animate={isInView ? "visible" : "hidden"}
           className="max-w-4xl mx-auto text-center"
         >
+          {/* About Paragraph */}
           <motion.div variants={itemVariants} className="mb-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
               About <span className="text-gradient">Me</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              I'm a passionate Web Developer and recent graduate with a keen interest in creating 
-              exceptional digital experiences. My journey in technology is driven by curiosity, 
-              continuous learning, and the desire to solve complex problems through innovative solutions.
+              {data?.about || "Loading about information..."}
             </p>
           </motion.div>
 

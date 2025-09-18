@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Cubes.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSkills } from "@/action/skillsActions";
 
 const SkillBox = ({ images }) => {
   return (
@@ -14,33 +16,31 @@ const SkillBox = ({ images }) => {
 };
 
 const HexaSkills3D = () => {
-  // Replace with your PNG icons later
-const placeholders1 = [
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", // React
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", // JavaScript
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", // HTML
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", // CSS
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg", // Tailwind CSS
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", // Node.js
-];
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.skills);
 
-const placeholders2 = [
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", // MongoDB
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", // Python
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg", // TensorFlow
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", // Git
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", // GitHub
-  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", // Express.js
-];
+  const placeholders1 = data?.placeholders1 || [];
+  const placeholders2 = data?.placeholders2 || [];
+
+  useEffect(() => {
+    if (!data) dispatch(fetchSkills());
+  }, [dispatch, data]);
+
+  if (loading) return <p className="text-center text-muted-foreground">Loading skills...</p>;
+  if (error) return <p className="text-center text-red-500">Error loading skills</p>;
 
   return (
     <div className="skills3d-container">
-      <div className="skills3d-wrapper">
-        <SkillBox images={placeholders1} />
-      </div>
-      <div className="skills3d-wrapper">
-        <SkillBox images={placeholders2} />
-      </div>
+      {placeholders1.length > 0 && (
+        <div className="skills3d-wrapper">
+          <SkillBox images={placeholders1} />
+        </div>
+      )}
+      {placeholders2.length > 0 && (
+        <div className="skills3d-wrapper">
+          <SkillBox images={placeholders2} />
+        </div>
+      )}
     </div>
   );
 };
