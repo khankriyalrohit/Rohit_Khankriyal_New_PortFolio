@@ -4,7 +4,8 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-import cors from "cors";
+const cors = require("cors")
+
 
 const app = express();
 
