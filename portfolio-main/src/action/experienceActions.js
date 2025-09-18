@@ -13,14 +13,17 @@ import {
 } from "../constants/portfolioconstants";
 import axiosInstance from "../utils/axiosInstance";
 
-// Fetch all experiences
+// Fetch experience
 export const fetchExperience = () => async (dispatch) => {
   try {
     dispatch({ type: EXPERIENCE_REQUEST });
-    const { data } = await axios.get(EXPERIENCE_API);
+    const { data } = await axiosInstance.get(EXPERIENCE_API);
     dispatch({ type: EXPERIENCE_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: EXPERIENCE_FAIL, payload: error.message });
+    dispatch({
+      type: EXPERIENCE_FAIL,
+      payload: error.response?.data?.message || error.message,
+    });
   }
 };
 

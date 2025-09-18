@@ -14,10 +14,13 @@ import axiosInstance from "../utils/axiosInstance";
 export const fetchSkills = () => async (dispatch) => {
   try {
     dispatch({ type: SKILLS_REQUEST });
-    const { data } = await axios.get(SKILLS_API);
+    const { data } = await axiosInstance.get(SKILLS_API);
     dispatch({ type: SKILLS_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: SKILLS_FAIL, payload: error.message });
+    dispatch({
+      type: SKILLS_FAIL,
+      payload: error.response?.data?.message || error.message,
+    });
   }
 };
 

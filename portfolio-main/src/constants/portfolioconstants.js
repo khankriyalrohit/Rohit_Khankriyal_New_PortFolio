@@ -13,7 +13,7 @@ export const HERO_UPDATE_FAIL = "HERO_UPDATE_FAIL";
 
 // API endpoint
 export const HERO_API = "/api/hero";
-export const HERO2_API = "/hero";
+
 
 // ========================
 // SKILL SECTION
@@ -28,7 +28,7 @@ export const SKILLS_UPDATE_FAIL = "SKILLS_UPDATE_FAIL";
 
 // API endpoint
 export const SKILLS_API = "/api/skills";
-export const SKILLS2_API = "/skills";
+
 
 // ========================
 // EXPERIENCE SECTION
@@ -47,7 +47,7 @@ export const EXPERIENCE_DELETE_FAIL = "EXPERIENCE_DELETE_FAIL";
 
 // API endpoint
 export const EXPERIENCE_API = "/api/experience";
-export const EXPERIENCE2_API = "/experience";
+
 
 // ========================
 // PROJECT SECTION
@@ -66,4 +66,4 @@ export const PROJECT_DELETE_FAIL = "PROJECT_DELETE_FAIL";
 
 // API endpoint
 export const PROJECT_API = "/api/projects";
-export const PROJECT2_API = "/projects"; 
+

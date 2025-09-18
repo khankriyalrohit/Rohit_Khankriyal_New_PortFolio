@@ -13,14 +13,18 @@ import {
 } from "../constants/portfolioconstants";
 import axiosInstance from "../utils/axiosInstance";
 
+
 // Fetch all projects
 export const fetchProjects = () => async (dispatch) => {
   try {
     dispatch({ type: PROJECT_REQUEST });
-    const { data } = await axios.get(PROJECT_API);
+    const { data } = await axiosInstance.get(PROJECT_API);
     dispatch({ type: PROJECT_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: PROJECT_FAIL, payload: error.message });
+    dispatch({
+      type: PROJECT_FAIL,
+      payload: error.response?.data?.message || error.message,
+    });
   }
 };
 

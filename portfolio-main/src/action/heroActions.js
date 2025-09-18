@@ -14,10 +14,13 @@ import axiosInstance from "../utils/axiosInstance";
 export const fetchHero = () => async (dispatch) => {
   try {
     dispatch({ type: HERO_REQUEST });
-    const { data } = await axios.get(HERO_API);
+    const { data } = await axiosInstance.get(HERO_API);
     dispatch({ type: HERO_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: HERO_FAIL, payload: error.message });
+    dispatch({
+      type: HERO_FAIL,
+      payload: error.response?.data?.message || error.message,
+    });
   }
 };
 

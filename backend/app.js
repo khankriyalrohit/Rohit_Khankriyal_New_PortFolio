@@ -4,8 +4,18 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
+import cors from "cors";
 
 const app = express();
+
+// ✅ Allow requests from your Firebase frontend
+app.use(
+  cors({
+    origin: ["https://rohit-khankriyal-new-portfolio.web.app"], // your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // App using these functionalities from various packages
 app.use(express.json());

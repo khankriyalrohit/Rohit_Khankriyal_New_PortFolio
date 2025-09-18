@@ -1,22 +1,23 @@
 // src/utils/axiosInstance.js
 import axios from "axios";
 
+// Use environment variable (set in .env.development / .env.production)
 const axiosInstance = axios.create({
-  baseURL: "/", // all requests are relative to /api
+  baseURL: import.meta.env.VITE_API_BASE_URL || "/", 
 });
 
-// helper to set / clear token and persist in sessionStorage
+// Helper to set / clear JWT token and persist in sessionStorage
 export function setAdminToken(token) {
   if (token) {
     axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    sessionStorage.setItem("adminToken", token); // store token for current browser session
+    sessionStorage.setItem("adminToken", token); // ✅ store for current session
   } else {
     delete axiosInstance.defaults.headers.common["Authorization"];
     sessionStorage.removeItem("adminToken");
   }
 }
 
-// If page loads and there's token in sessionStorage - apply it
+// If page reloads and token exists → apply it
 const existing = sessionStorage.getItem("adminToken");
 if (existing) {
   axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${existing}`;
